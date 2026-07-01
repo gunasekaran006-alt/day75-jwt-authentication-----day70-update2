@@ -22,7 +22,15 @@ const registerApi = async (req, res) => {
             { username, email, password: hashedPassword }
         );
 
-        res.status(201).json(newUser);
+        // Wrong way : Returning Password in Response
+        // res.status(201).json(newUser);
+
+        // Correct way :
+        res.status(201).json({ 
+    message: "User Registration Successful", 
+    user: { username: newUser.username, email: newUser.email } 
+});
+
 
     } catch (err) {
         res.status(500).json({ message: "User account creation failed" });
